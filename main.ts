@@ -15,12 +15,16 @@ basic.forever(function on_forever() {
             `)
         music.playTone(Note.C, music.beat())
     })
-    if (input.pinIsPressed(TouchPin.P1)) {
+    if (input.pinIsPressed(TouchPin.P1) == true && input.pinIsPressed(TouchPin.P2) == false) {
         basic.showNumber(1)
     }
     
-    if (input.pinIsPressed(TouchPin.P2)) {
+    if (input.pinIsPressed(TouchPin.P2) == true && input.pinIsPressed(TouchPin.P1) == false) {
         basic.showNumber(2)
+    }
+    
+    if (input.pinIsPressed(TouchPin.P1) == true && input.pinIsPressed(TouchPin.P2) == true) {
+        basic.showString("R")
     }
     
 })

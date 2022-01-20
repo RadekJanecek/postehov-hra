@@ -16,9 +16,10 @@ def on_forever():
         music.play_tone(Note.C, music.beat())
     control.in_background(run_parallel)
     
-    if input.pin_is_pressed(TouchPin.P1):
+    if input.pin_is_pressed(TouchPin.P1) == True and input.pin_is_pressed(TouchPin.P2) == False:
         basic.show_number(1)
-    if input.pin_is_pressed(TouchPin.P2):
+    if input.pin_is_pressed(TouchPin.P2) == True and input.pin_is_pressed(TouchPin.P1) == False:
         basic.show_number(2)
-    
+    if input.pin_is_pressed(TouchPin.P1) == True and input.pin_is_pressed(TouchPin.P2) == True:
+        basic.show_string("R")
 basic.forever(on_forever)

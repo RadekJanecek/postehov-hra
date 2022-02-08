@@ -1,30 +1,72 @@
-pins.touchSetMode(TouchTarget.P1, TouchTargetMode.Capacitive)
-pins.touchSetMode(TouchTarget.P2, TouchTargetMode.Capacitive)
-basic.forever(function on_forever() {
-    console.logValue("P1", input.pinIsPressed(TouchPin.P1))
-    console.logValue("P2", input.pinIsPressed(TouchPin.P2))
-    let čekání = randint(3000, 10000)
-    control.inBackground(function run_parallel() {
-        basic.pause(čekání)
+let hra = false
+let cheatoval = false
+control.inBackground(function main() {
+    
+    basic.clearScreen()
+    basic.pause(randint(3000, 10000))
+    if (cheatoval == false) {
+        hra = true
         basic.showLeds(`
-            . . # . .
-            . . # . .
-            # # # # #
-            . . # . .
-            . . # . .
-            `)
-        music.playTone(Note.C, music.beat())
-    })
-    if (input.pinIsPressed(TouchPin.P1) == true && input.pinIsPressed(TouchPin.P2) == false) {
-        basic.showNumber(1)
+. . # . .
+. . # . .
+# # # # #
+. . # . .
+. . # . .`)
+        music.playTone(Note.C, 1500)
     }
     
-    if (input.pinIsPressed(TouchPin.P2) == true && input.pinIsPressed(TouchPin.P1) == false) {
-        basic.showNumber(2)
-    }
+})
+basic.forever(function on_forever() {
     
-    if (input.pinIsPressed(TouchPin.P1) == true && input.pinIsPressed(TouchPin.P2) == true) {
-        basic.showString("R")
+    let p1 = pins.digitalReadPin(DigitalPin.P1)
+    let p2 = pins.digitalReadPin(DigitalPin.P2)
+    if (hra == true) {
+        if (p1 == 0 && p2 == 1) {
+            hra = false
+            basic.showNumber(1)
+            basic.pause(3000)
+            control.reset()
+        }
+        
+        if (p1 == 1 && p2 == 0) {
+            hra = false
+            basic.showNumber(2)
+            basic.pause(3000)
+            control.reset()
+        }
+        
+        if (p1 == 0 && p2 == 0) {
+            hra = false
+            basic.showString("R")
+            basic.pause(3000)
+            control.reset()
+        }
+        
+    } else {
+        if (p1 == 0 && p2 == 1) {
+            hra = false
+            basic.showString("B")
+            cheatoval = true
+            basic.pause(3000)
+            control.reset()
+        }
+        
+        if (p1 == 1 && p2 == 0) {
+            hra = false
+            basic.showString("A")
+            cheatoval = true
+            basic.pause(3000)
+            control.reset()
+        }
+        
+        if (p1 == 0 && p2 == 0) {
+            hra = false
+            basic.showString("C")
+            cheatoval = true
+            basic.pause(3000)
+            control.reset()
+        }
+        
     }
     
 })

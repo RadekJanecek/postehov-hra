@@ -2,6 +2,8 @@ hra = False
 cheatoval = False
 def main():
     global hra, cheatoval
+    hra = False
+    cheatoval = False
     basic.clear_screen()
     basic.pause(randint(3000, 10000))
     if cheatoval == False:
@@ -19,34 +21,34 @@ def on_forever():
             hra = False
             basic.show_number(1)
             basic.pause(3000)
-            control.reset()
+            main()
         if p1 == 1 and p2 == 0:
             hra = False
             basic.show_number(2)
             basic.pause(3000)
-            control.reset()
+            main()
         if p1 == 0 and p2 == 0:
             hra = False
             basic.show_string("R")
             basic.pause(3000)
-            control.reset()
+            main()
     else:
         if p1 == 0 and p2 == 1:
             hra = False
             basic.show_string("B")
             cheatoval = True
             basic.pause(3000)
-            control.reset()
+            main()
         if p1 == 1 and p2 == 0:
             hra = False
             basic.show_string("A")
             cheatoval = True
             basic.pause(3000)
-            control.reset()
+            main()
         if p1 == 0 and p2 == 0:
             hra = False
             basic.show_string("C")
             cheatoval = True
             basic.pause(3000)
-            control.reset()
+            main()
 basic.forever(on_forever)

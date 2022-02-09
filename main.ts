@@ -1,7 +1,9 @@
 let hra = false
 let cheatoval = false
-control.inBackground(function main() {
+function main() {
     
+    hra = false
+    cheatoval = false
     basic.clearScreen()
     basic.pause(randint(3000, 10000))
     if (cheatoval == false) {
@@ -15,7 +17,9 @@ control.inBackground(function main() {
         music.playTone(Note.C, 1500)
     }
     
-})
+}
+
+control.inBackground(main)
 basic.forever(function on_forever() {
     
     let p1 = pins.digitalReadPin(DigitalPin.P1)
@@ -25,21 +29,21 @@ basic.forever(function on_forever() {
             hra = false
             basic.showNumber(1)
             basic.pause(3000)
-            control.reset()
+            main()
         }
         
         if (p1 == 1 && p2 == 0) {
             hra = false
             basic.showNumber(2)
             basic.pause(3000)
-            control.reset()
+            main()
         }
         
         if (p1 == 0 && p2 == 0) {
             hra = false
             basic.showString("R")
             basic.pause(3000)
-            control.reset()
+            main()
         }
         
     } else {
@@ -48,7 +52,7 @@ basic.forever(function on_forever() {
             basic.showString("B")
             cheatoval = true
             basic.pause(3000)
-            control.reset()
+            main()
         }
         
         if (p1 == 1 && p2 == 0) {
@@ -56,7 +60,7 @@ basic.forever(function on_forever() {
             basic.showString("A")
             cheatoval = true
             basic.pause(3000)
-            control.reset()
+            main()
         }
         
         if (p1 == 0 && p2 == 0) {
@@ -64,7 +68,7 @@ basic.forever(function on_forever() {
             basic.showString("C")
             cheatoval = true
             basic.pause(3000)
-            control.reset()
+            main()
         }
         
     }

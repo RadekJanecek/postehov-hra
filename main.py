@@ -1,33 +1,18 @@
 pins.touch_set_mode(TouchTarget.P1, TouchTargetMode.CAPACITIVE)
-pins.touch_set_mode(TouchTarget.P1, TouchTargetMode.CAPACITIVE)
+pins.touch_set_mode(TouchTarget.P2, TouchTargetMode.CAPACITIVE)
 hra = False
 cheatoval1 = False
 cheatoval2 = False
 def main():
     global hra, cheatoval1, cheatoval2
     hra = False
-    cheatoval = False
+    cheatoval1 = False
+    cheatoval2 = False
     basic.clear_screen()
     basic.pause(randint(3000, 10000))
-    if cheatoval == False:
-        hra = True
-        basic.show_leds("""\n. . # . .\n. . # . .\n# # # # #\n. . # . .\n. . # . .""")
-        music.play_tone(Note.C, 1500)
-    if cheatoval1 == True and cheatoval2 == True:
-        hra = False
-        basic.show_string("C")
-        basic.pause(3000)
-        main()
-    if cheatoval1 == True and cheatoval2 == False:
-        hra = False
-        basic.show_string("A")            
-        basic.pause(3000)
-        main()
-    if cheatoval1 == False and cheatoval2 == True:
-        hra = False
-        basic.show_string("B")
-        basic.pause(3000)
-        main()
+    hra = True
+    basic.show_leds("""\n. . # . .\n. . # . .\n# # # # #\n. . # . .\n. . # . .""")
+    music.play_tone(Note.C, 1500)
 control.in_background(main)
 
 def on_forever():
@@ -52,12 +37,25 @@ def on_forever():
             basic.show_string("R")
             basic.pause(3000)
             main()
+        if cheatoval1 == True and cheatoval2 == True:
+            hra = False
+            basic.show_string("C")
+            basic.pause(3000)
+            main()
+        if cheatoval1 == True and cheatoval2 == False:
+            hra = False
+            basic.show_string("A")
+            basic.pause(3000)
+            main()
+        if cheatoval1 == False and cheatoval2 == True:
+            hra = False
+            basic.show_string("B")
+            basic.pause(3000)
+            main()
     else:
         if p1 == True and p2 == False:
-            cheatoval2 = True
-        if p1 == False and p2 == True:
             cheatoval1 = True
-        if p1 == True and p2 == True:
-            cheatoval1 = True
+        if p2 == True and p1 == False:
             cheatoval2 = True
+
 basic.forever(on_forever)

@@ -1,46 +1,23 @@
 pins.touchSetMode(TouchTarget.P1, TouchTargetMode.Capacitive)
-pins.touchSetMode(TouchTarget.P1, TouchTargetMode.Capacitive)
+pins.touchSetMode(TouchTarget.P2, TouchTargetMode.Capacitive)
 let hra = false
 let cheatoval1 = false
 let cheatoval2 = false
 function main() {
     
     hra = false
-    let cheatoval = false
+    cheatoval1 = false
+    cheatoval2 = false
     basic.clearScreen()
     basic.pause(randint(3000, 10000))
-    if (cheatoval == false) {
-        hra = true
-        basic.showLeds(`
+    hra = true
+    basic.showLeds(`
 . . # . .
 . . # . .
 # # # # #
 . . # . .
 . . # . .`)
-        music.playTone(Note.C, 1500)
-    }
-    
-    if (cheatoval1 == true && cheatoval2 == true) {
-        hra = false
-        basic.showString("C")
-        basic.pause(3000)
-        main()
-    }
-    
-    if (cheatoval1 == true && cheatoval2 == false) {
-        hra = false
-        basic.showString("A")
-        basic.pause(3000)
-        main()
-    }
-    
-    if (cheatoval1 == false && cheatoval2 == true) {
-        hra = false
-        basic.showString("B")
-        basic.pause(3000)
-        main()
-    }
-    
+    music.playTone(Note.C, 1500)
 }
 
 control.inBackground(main)
@@ -72,17 +49,33 @@ basic.forever(function on_forever() {
             main()
         }
         
+        if (cheatoval1 == true && cheatoval2 == true) {
+            hra = false
+            basic.showString("C")
+            basic.pause(3000)
+            main()
+        }
+        
+        if (cheatoval1 == true && cheatoval2 == false) {
+            hra = false
+            basic.showString("A")
+            basic.pause(3000)
+            main()
+        }
+        
+        if (cheatoval1 == false && cheatoval2 == true) {
+            hra = false
+            basic.showString("B")
+            basic.pause(3000)
+            main()
+        }
+        
     } else {
         if (p1 == true && p2 == false) {
-            cheatoval2 = true
-        }
-        
-        if (p1 == false && p2 == true) {
             cheatoval1 = true
         }
         
-        if (p1 == true && p2 == true) {
-            cheatoval1 = true
+        if (p2 == true && p1 == false) {
             cheatoval2 = true
         }
         
